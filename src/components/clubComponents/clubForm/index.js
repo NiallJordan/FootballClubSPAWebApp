@@ -68,7 +68,7 @@ export default class Form extends Component {
                 className="form-control"
                 placeholder="League"
                 value={this.state.league}
-                onChange={this,this.handleLeagueChange}></input>
+                onChange={this, this.handleLeagueChange}></input>
             </div>
             <div className="form-group">
               <input type="text"

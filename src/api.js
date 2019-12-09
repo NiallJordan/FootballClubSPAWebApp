@@ -14,3 +14,7 @@ export const add = (newName,newLogo,newLeague,newPlaceInLeague,newPhone,newCity,
   return axios.post('/api/clubs', { name: newName, logo: newLogo, league: newLeague, placeInLeague: newPlaceInLeague, phone: newPhone, city: newCity, country: newCountry,stadium_name: newStadiumName,capacity:newCapacity , numberOfPlayers: newNumberOfPlayers,yearEstablished: newYearEstablished, manager_name:newManagerName, titlesWon: newTitlesWon })
               .then(resp => resp.data);
 };
+
+export const update = (key,placeInLeague,phone) => {
+  return axios.update(`/api/clubs/${key}`).then(resp => resp.data);
+};

@@ -9,7 +9,6 @@ class Header extends Component {
                 <Navbar.Brand classname="row " href="/">Football Club List  <span className="badge badge-pill badge-success">{this.props.noClubs}</span> </Navbar.Brand>
                 <Navbar.Collapse classname="col-md-6 offset-4" id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        
                     </Nav>
                 </Navbar.Collapse>
         </Navbar>

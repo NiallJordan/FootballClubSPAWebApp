@@ -1,12 +1,12 @@
 import React, {Fragment} from "react";
 import ClubPublic from "../clubPublic/clubPublic";
-import api from "../../../dataStore/stubAPI";
+import * as api from "../../../api";
 import ClubMoreInfo from "../clubMoreInfo/index";
 import { withRouter, Route, Link } from "react-router-dom";
 
 const ClubPage = props => {
   const { id } = props.match.params;
-  const club = api.find(id);
+  const club = api.getClub(id);
    return (
     <Fragment>
        {club ? (

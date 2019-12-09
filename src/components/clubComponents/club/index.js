@@ -4,7 +4,8 @@ import "../../../fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import buttons from "../../../config/buttonsConfig";
 import { Link } from "react-router-dom";
-import api from '../../../dataStore/stubAPI'
+//import api from '../../../dataStore/stubAPI'
+import * as api from '../../../api';
 
 class Club extends Component{
     state = {

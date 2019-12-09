@@ -5,11 +5,20 @@ import FilterControls from "./components/filterControls/";
 import ClubForm from "./components/clubComponents/clubForm";
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
-import api from "./dataStore/stubAPI";
+//import api from './dataStore/stubAPI';
+import * as api from './api';
 import _ from 'lodash';
 
 class App extends Component {
-  state = { search:"",league:"all"};
+  state = { search:"",league:"all", clubs:[{}]};
+
+  componentDidMount(){
+    api.getAll().then(resp => {
+      this.setState({
+        clubs: resp.clubs
+      });
+    }).catch(console.error);
+  };
 
   handleChange = (type,value)=>{
     type === "name"
@@ -17,19 +26,16 @@ class App extends Component {
     : this.setState({ league : value});
   };
 
-  addClub = (name,logo,league,placeInLeague,phone,city,country,stadium_name,capacity,numberOfPlayers,yearEstablished,manager_name) => {
-    api.add(name,logo,league,placeInLeague,phone,city,country,stadium_name,capacity,numberOfPlayers,yearEstablished,manager_name);
-    this.setState({});
+  addClub = (name,logo,league,placeInLeague,phone,city,country,stadium_name,capacity,numberOfPlayers,yearEstablished,manager_name,titlesWon) => {
+    api.add(name,logo,league,placeInLeague,phone,city,country,stadium_name,capacity,numberOfPlayers,yearEstablished,manager_name,titlesWon)
+    .then(resp => {
+      const newClub = {"id":resp.id,"name":name,"logo":logo,"league": league,"placeInLeague":placeInLeague,"phone":phone,"city":city,"country":country,"stadium_name":stadium_name,"capacity":capacity,"numberOfPlayers":numberOfPlayers,"yearEstablished":yearEstablished,"manager_name":manager_name, "titlesWon":titlesWon}
+      this.setState({clubs: this.state.clubs.concat([newClub])});
+    })
   }
 
-
-  deleteClub =(key) => {
-    api.delete(key);
-    this.setState({});
-  };
-
   render() {
-    let clubs = api.getAll();
+    const clubs = _.sortBy(this.state.clubs, club => club.placeInLeagues);
     let filteredClubs = clubs.filter( c => {
       const name = `${c.name}`;
       return name.toLowerCase().search(this.state.search.toLowerCase()) !== -1;
@@ -38,14 +44,14 @@ class App extends Component {
     let sortedClubs = _.sortBy(filteredClubs,c => c.placeInLeague);
     return (
     <Fragment>
-        <Header noClubs={sortedClubs.length} />
+        <Header noClubs={clubs.length} />
         <FilterControls onUserInput={this.handleChange}/>
         <div className="row">
           <div className="col-md-3">
           <ClubForm handleAdd={this.addClub} />
           </div>
           <div className="col-md-9">
-          <ClubList clubs={sortedClubs} deleteHandler={this.deleteClub}/>
+          <ClubList clubs={clubs} deleteHandler={this.deleteClub}/>
           </div>
         </div>
       </Fragment>
