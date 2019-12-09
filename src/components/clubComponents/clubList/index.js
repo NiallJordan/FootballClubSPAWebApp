@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Club from "../club/";
+import Club from "../club";
 import './clubList.css';
 
 export default class ClubList extends Component {

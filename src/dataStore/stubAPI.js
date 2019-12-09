@@ -87,7 +87,7 @@ class StubAPI{
         ];
     }
 
-    find(id){
+    getClub(id){
         let index = _.findIndex(this.clubs, club => `${club.phone}` === id);
         if(index !== -1){
             return this.clubs[index];

@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from "react";
-import Header from "./components/header/";
+import Header from "./components/header";
 import ClubList from "./components/clubComponents/clubList";
-import FilterControls from "./components/filterControls/";
+import FilterControls from "./components/filterControls";
 import ClubForm from "./components/clubComponents/clubForm";
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 //import api from './dataStore/stubAPI';
 import * as api from './api';

@@ -5,7 +5,7 @@ export const getAll = () => {
               .then(resp => resp.data);
 };
 
-export const getClub = id => {
+export const getClub = (id) => {
   return axios.get(`/api/clubs/${id}`)
               .then(resp => resp.data);
 };
@@ -15,6 +15,7 @@ export const add = (newName,newLogo,newLeague,newPlaceInLeague,newPhone,newCity,
               .then(resp => resp.data);
 };
 
-export const update = (key,placeInLeague,phone) => {
-  return axios.update(`/api/clubs/${key}`).then(resp => resp.data);
+export const update = (id,newId,newName,newLogo, newLeague,newPlaceInLeague,newPhone,newCity,newCountry,newStadiumName,newCapacity,newNumberOfPlayers,newYearEstablished,newManagerName,newTitlesWon) => {
+  return axios.put(`/api/clubs/${id}`, {id: newId, name:newName, logo:newLogo, league: newLeague, placeInLeague: newPlaceInLeague,phone: newPhone,city : newCity,country: newCountry, stadium_name: newStadiumName, capacity: newCapacity,numberOfPlayers: newNumberOfPlayers,yearEstablished: newYearEstablished,manager_name:newManagerName,titlesWon:newTitlesWon})
+  .then(resp => resp.data);
 };
