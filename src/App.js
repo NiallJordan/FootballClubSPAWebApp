@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   render() {
-    const clubs = _.sortBy(this.state.clubs, club => club.placeInLeagues);
+    const clubs = _.sortBy(this.state.clubs, club => club.placeInLeague);
     let filteredClubs = clubs.filter( c => {
       const name = `${c.name}`;
       return name.toLowerCase().search(this.state.search.toLowerCase()) !== -1;
@@ -44,14 +44,14 @@ class App extends Component {
     let sortedClubs = _.sortBy(filteredClubs,c => c.placeInLeague);
     return (
     <Fragment>
-        <Header noClubs={clubs.length} />
+        <Header noClubs={sortedClubs.length} />
         <FilterControls onUserInput={this.handleChange}/>
         <div className="row">
           <div className="col-md-3">
           <ClubForm handleAdd={this.addClub} />
           </div>
           <div className="col-md-9">
-          <ClubList clubs={clubs} deleteHandler={this.deleteClub}/>
+          <ClubList clubs={sortedClubs} deleteHandler={this.deleteClub}/>
           </div>
         </div>
       </Fragment>
