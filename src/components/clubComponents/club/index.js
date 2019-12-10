@@ -4,8 +4,8 @@ import "../../../fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import buttons from "../../../config/buttonsConfig";
 import { Link } from "react-router-dom";
-import api from '../../../dataStore/stubAPI'
-//import * as api from '../../../api';
+//import api from '../../../dataStore/stubAPI'
+import * as api from '../../../api';
 
 class Club extends Component{
     state = {
@@ -41,8 +41,8 @@ class Club extends Component{
 
     handleDelete = () =>  this.setState({ status : 'del'} );
     handleConfirm = (e) => {
-    e.preventDefault();
-    this.props.deleteHandler(this.state.phone);
+        e.preventDefault();
+        this.props.deleteHandler(this.state.phone);
     };
 
 

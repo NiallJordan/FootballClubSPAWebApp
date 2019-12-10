@@ -9,13 +9,6 @@ import ClubPage from "./components/clubComponents/clubPage/clubPage";
 
 class Router extends Component {
   
-  componentDidMount(){
-    api.getAll().then(resp => {
-      this.setState({
-        clubs: resp.clubs
-      });
-    }).catch(console.error);
-  };
   render() {
     return (
        <BrowserRouter>

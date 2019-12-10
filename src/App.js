@@ -32,7 +32,14 @@ class App extends Component {
       const newClub = {"id":resp.id,"name":name,"logo":logo,"league": league,"placeInLeague":placeInLeague,"phone":phone,"city":city,"country":country,"stadium_name":stadium_name,"capacity":capacity,"numberOfPlayers":numberOfPlayers,"yearEstablished":yearEstablished,"manager_name":manager_name, "titlesWon":titlesWon}
       this.setState({clubs: this.state.clubs.concat([newClub])});
     })
-  }
+  };
+
+  deleteClub  = (id) => {
+    api.deleteClub(id).then(resp => {
+      const club = {"id":resp.id};
+      this.setState({clubs: this.state.clubs.splice([club])});
+    })
+  };
 
   render() {
     const clubs = _.sortBy(this.state.clubs, club => club.placeInLeague);

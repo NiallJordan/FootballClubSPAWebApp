@@ -19,3 +19,8 @@ export const update = (id,newId,newName,newLogo, newLeague,newPlaceInLeague,newP
   return axios.put(`/api/clubs/${id}`, {id: newId, name:newName, logo:newLogo, league: newLeague, placeInLeague: newPlaceInLeague,phone: newPhone,city : newCity,country: newCountry, stadium_name: newStadiumName, capacity: newCapacity,numberOfPlayers: newNumberOfPlayers,yearEstablished: newYearEstablished,manager_name:newManagerName,titlesWon:newTitlesWon})
   .then(resp => resp.data);
 };
+
+export const deleteClub = (id) => {
+  return axios.delete(`/api/clubs/${id}`)
+  .then(resp => resp.data);
+};

@@ -56,11 +56,10 @@ export default class Form extends Component {
                 onChange={this,this.handleNameChange}></input>
             </div>
             <div className="form-group">
-                <input type="file" accept="image/*" id="file" onChange="loadFile(event)" name="image"
+                <input type="file" accept="image/*" id="file" onChange={this, this.handleLogoChange} name="image"
                   className="form-control"
                   placeholder="Logo"
                   value={this.state.logo}
-                  onChange={this, this.handleLogoChange}
                   ></input>
             </div>
             <div className="form-group">
