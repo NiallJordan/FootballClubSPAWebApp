@@ -10,33 +10,83 @@ import * as api from '../../../api';
 class Club extends Component{
     state = {
         status: "",
+        name:this.props.club.name,
+        logo:this.props.club.logo,
+        league:this.props.club.league,
+        placeInLeague:this.props.club.placeInLeague,
         phone: this.props.club.phone,
-        placeInLeague: this.props.club.placeInLeague,
+        city: this.props.club.city,
+        country: this.props.club.country,
+        stadium_name: this.props.club.stadium_name,
+        capacity: this.props.club.capacity,
+        numberOfPlayers: this.props.club.numberOfPlayers,
+        yearEstablished: this.props.club.yearEstablished,
+        manager_name: this.props.club.manager_name,
+        titlesWon: this.props.club.titlesWon,
+
+
         previousDetails: {
-            phone:this.props.club.phone,
-            placeInLeague: this.props.club.placeInLeague
+            name:this.props.club.name,
+            logo:this.props.club.logo,
+            league:this.props.club.league,
+            placeInLeague:this.props.club.placeInLeague,
+            phone: this.props.club.phone,
+            city: this.props.club.city,
+            country: this.props.club.country,
+            stadium_name: this.props.club.stadium_name,
+            capacity: this.props.club.capacity,
+            numberOfPlayers: this.props.club.numberOfPlayers,
+            yearEstablished: this.props.club.yearEstablished,
+            manager_name: this.props.club.manager_name,
+            titlesWon: this.props.club.titlesWon
         }
       };
 
     //-----------------HANDLERS----------------------
     handleEdit = () => this.setState({status:"edit"});
     handleCancel = () => {
-        let {placeInLeague,phone} = this.state.previousDetails;
-        this.setState({ status:"", placeInLeague,phone});
+        let {name,logo,league,placeInLeague,phone, city, country, stadium_name, capacity, numberOfPlayers,yearEstablished,manager_name,titlesWon} = this.state.previousDetails;
+        this.setState({ status:"", name,logo,league,placeInLeague,phone, city, country, stadium_name, capacity, numberOfPlayers,yearEstablished,manager_name,titlesWon});
     };
+
+    handleNameChange = e => this.setState({name: e.target.value});
+    handleLogoChange = e => this.setState({logo: e.target.value});
+    handleLeagueChange = e => this.setState({league: e.target.value});
     handlePhoneChange = e => this.setState({phone: e.target.value});
     handlePlaceInLeagueChange = e => this.setState({placeInLeague: e.target.value});
+    handleCityChange = e => this.setState({city: e.target.value});
+    handleCountryChange = e => this.getSnapshotBeforeUpdate({country: e.target.value});
+    handleStadiumNameChange = e => this.setState({stadium_name: e.target.value});
+    handleCapacityChange = e => this.setState({capacity: e.target.value});
+    handleNumberOfPlayersChange = e => this.setState({numberOfPlayers: e.target.value});
+    handleYearEstablishedChange = e => this.setState({yearEstablished: e.target.value});
+    handleManagerNameChange = e => this.setState({manager_name: e.target.value});
+    handleTitlesWonChange = e => this.setState({titlesWon: e.target.value});
+
+
     handleSave = e => {
         e.preventDefault();
         let updatedPlaceInLeague = this.state.placeInLeague.trim();
         let updatedPhone = this.state.phone.trim();
 
-        if(!updatedPlaceInLeague || !updatedPhone){
+        let updatedName = this.state.name.trim();
+        let updatedLogo = this.state.logo.trim();
+        let updatedLeague = this.state.league.trim();
+        let updatedCity = this.state.city.trim();
+        let updatedCountry = this.state.country.trim();
+        let updatedStadiumName = this.state.stadium_name.trim();
+        let updatedCapacity = this.state.capacity.trim();
+        let updatedNumberOfPlayers = this.state.numberOfPlayers.trim();
+        let updatedYearEstablished = this.state.yearEstablished.trim();
+        let updatedManagerName = this.state.manager_name.trim();
+        let updatedTitlesWon = this.state.titlesWon.trim();
+
+        if(!updatedPlaceInLeague || !updatedPhone || !updatedName || !updatedLogo  || !updatedLeague || !updatedCity || !updatedCountry || !updatedStadiumName || !updatedCapacity || !updatedNumberOfPlayers || !updatedYearEstablished || !updatedManagerName|| !updatedTitlesWon){
             return;
         }
-        let {placeInLeague,phone} = this.state;
-        this.setState({status: "", previousDetails:{placeInLeague,phone}});
-        api.update(this.state.previousDetails.phone,updatedPlaceInLeague,updatedPhone);
+        let {name,logo,league,placeInLeague,phone, city,country,stadium_name,capacity,numberOfPlayers,yearEstablished,manager_name,titlesWon} = this.state;
+        this.setState({status: "", previousDetails:{name,logo,league,placeInLeague,phone, city,country,stadium_name,capacity,numberOfPlayers,yearEstablished,manager_name,titlesWon}});
+        api.update(this.state.previousDetails.phone,updatedName,updatedLogo,updatedLeague,updatedPlaceInLeague, updatedPhone,updatedCity ,updatedCountry,updatedStadiumName,updatedCapacity, updatedNumberOfPlayers, updatedYearEstablished, updatedManagerName, updatedTitlesWon);
     };
 
     handleDelete = () =>  this.setState({ status : 'del'} );

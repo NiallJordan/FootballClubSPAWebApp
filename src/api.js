@@ -15,8 +15,8 @@ export const add = (newName,newLogo,newLeague,newPlaceInLeague,newPhone,newCity,
               .then(resp => resp.data);
 };
 
-export const update = (id,newId,newName,newLogo, newLeague,newPlaceInLeague,newPhone,newCity,newCountry,newStadiumName,newCapacity,newNumberOfPlayers,newYearEstablished,newManagerName,newTitlesWon) => {
-  return axios.put(`/api/clubs/${id}`, {id: newId, name:newName, logo:newLogo, league: newLeague, placeInLeague: newPlaceInLeague,phone: newPhone,city : newCity,country: newCountry, stadium_name: newStadiumName, capacity: newCapacity,numberOfPlayers: newNumberOfPlayers,yearEstablished: newYearEstablished,manager_name:newManagerName,titlesWon:newTitlesWon})
+export const update = (id,newName,newLogo, newLeague,newPlaceInLeague,newPhone,newCity,newCountry,newStadiumName,newCapacity,newNumberOfPlayers,newYearEstablished,newManagerName,newTitlesWon) => {
+  return axios.put(`/api/clubs/${id}`, {id: id, name:newName, logo:newLogo, league: newLeague, placeInLeague: newPlaceInLeague,phone: newPhone,city : newCity,country: newCountry, stadium_name: newStadiumName, capacity: newCapacity,numberOfPlayers: newNumberOfPlayers,yearEstablished: newYearEstablished,manager_name:newManagerName,titlesWon:newTitlesWon})
   .then(resp => resp.data);
 };
 
