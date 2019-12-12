@@ -15,7 +15,7 @@ class App extends Component {
   componentDidMount(){
     api.getAll().then(resp => {
       this.setState({
-        clubs: resp.clubs
+        clubs: resp
       });
     }).catch(console.error);
   };
