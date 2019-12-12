@@ -14,7 +14,7 @@ export default ({ club }) => {
       <div className="col-2">
         <Link to="/">
           <FontAwesomeIcon icon={["fas", "arrow-circle-left"]} size="3x" />
-          <span>Back</span>
+          <span>Returns</span>
         </Link>
         </div>
         <div className="col-3 offset-2">

@@ -2,18 +2,20 @@ import React, { Component, Fragment } from "react";
 import Header from "./components/header";
 import ClubList from "./components/clubComponents/clubList";
 import FilterControls from "./components/filterControls";
-import ClubForm from "./components/clubComponents/clubForm";
 import 'bootstrap/dist/css/bootstrap.css';
-
 //import api from './dataStore/stubAPI';
 import * as api from './api';
 import _ from 'lodash';
 
 class App extends Component {
-  state = { search:"",league:"all", clubs:[{}]};
+  constructor(props){
+    super(props);
+    this.state = { search:"",league:"all", clubs:[{}]};
+  }
 
   componentDidMount(){
     api.getAll().then(resp => {
+      console.log(resp)
       this.setState({
         clubs: resp
       });
@@ -25,15 +27,7 @@ class App extends Component {
     ? this.setState({search : value})
     : this.setState({ league : value});
   };
-
-  addClub = (name,logo,league,placeInLeague,phone,city,country,stadium_name,capacity,numberOfPlayers,yearEstablished,manager_name,titlesWon) => {
-    api.add(name,logo,league,placeInLeague,phone,city,country,stadium_name,capacity,numberOfPlayers,yearEstablished,manager_name,titlesWon)
-    .then(resp => {
-      const newClub = {"id":resp.id,"name":name,"logo":logo,"league": league,"placeInLeague":placeInLeague,"phone":phone,"city":city,"country":country,"stadium_name":stadium_name,"capacity":capacity,"numberOfPlayers":numberOfPlayers,"yearEstablished":yearEstablished,"manager_name":manager_name, "titlesWon":titlesWon}
-      this.setState({clubs: this.state.clubs.concat([newClub])});
-    })
-  };
-
+  
   deleteClub  = (id) => {
     api.deleteClub(id).then(resp => {
       const club = {"id":resp.id};
@@ -54,10 +48,7 @@ class App extends Component {
         <Header noClubs={sortedClubs.length} />
         <FilterControls onUserInput={this.handleChange}/>
         <div className="row">
-          <div className="col-md-3">
-          <ClubForm handleAdd={this.addClub} />
-          </div>
-          <div className="col-md-9">
+          <div className="col-md-12">
           <ClubList clubs={sortedClubs} deleteHandler={this.deleteClub}/>
           </div>
         </div>

@@ -3,8 +3,8 @@ import "./club.css";
 import "../../../fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import buttons from "../../../config/buttonsConfig";
+
 import { Link } from "react-router-dom";
-//import api from '../../../dataStore/stubAPI'
 import * as api from '../../../api';
 
 class Club extends Component{
@@ -25,19 +25,9 @@ class Club extends Component{
         this.setState({ status:"", placeInLeague,phone});
     };
 
-    // handleNameChange = e => this.setState({name: e.target.value});
-    // handleLogoChange = e => this.setState({logo: e.target.value});
-    // handleLeagueChange = e => this.setState({league: e.target.value});
+
     handlePhoneChange = e => this.setState({phone: e.target.value});
     handlePlaceInLeagueChange = e => this.setState({placeInLeague: e.target.value});
-    // handleCityChange = e => this.setState({city: e.target.value});
-    // handleCountryChange = e => this.getSnapshotBeforeUpdate({country: e.target.value});
-    // handleStadiumNameChange = e => this.setState({stadium_name: e.target.value});
-    // handleCapacityChange = e => this.setState({capacity: e.target.value});
-    // handleNumberOfPlayersChange = e => this.setState({numberOfPlayers: e.target.value});
-    // handleYearEstablishedChange = e => this.setState({yearEstablished: e.target.value});
-    // handleManagerNameChange = e => this.setState({manager_name: e.target.value});
-    // handleTitlesWonChange = e => this.setState({titlesWon: e.target.value});
 
 
     handleSave = e => {
@@ -54,16 +44,12 @@ class Club extends Component{
     };
 
     handleDelete = () =>  this.setState({ status : 'del'} );
+    
     handleConfirm = (e) => {
         e.preventDefault();
         this.props.deleteHandler(this.state.phone);
     };
 
-
-    // shouldComponentUpdate(nextProps, nextState){
-    //     console.log(`shouldComponentUpdate of Club (${this.props.club.name})`)
-    //     return false;
-    // }
 
     render(){
         let activeButtons = buttons.normal;
