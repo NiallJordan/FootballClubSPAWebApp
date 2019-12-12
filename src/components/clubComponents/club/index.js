@@ -56,7 +56,7 @@ class Club extends Component{
     handleDelete = () =>  this.setState({ status : 'del'} );
     handleConfirm = (e) => {
         e.preventDefault();
-        this.props.deleteHandler();
+        this.props.deleteHandler(this.state.phone);
     };
 
 
