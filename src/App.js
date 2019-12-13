@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { Redirect } from 'react-router-dom';
 import Header from "./components/header";
 import ClubList from "./components/clubComponents/clubList";
 import FilterControls from "./components/filterControls";
@@ -10,16 +11,25 @@ import _ from 'lodash';
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = { search:"",league:"all", clubs:[{}]};
+    this.state = { search:"",league:"all", clubs:[{}], login:false};
   }
 
-  componentDidMount(){
-    api.getAll().then(resp => {
-      console.log(resp)
-      this.setState({
-        clubs: resp
-      });
-    }).catch(console.error);
+  async componentDidMount(){
+    this._isMounted= true
+    try{
+      const resp = await api.getAll();
+      console.log(resp);
+      if(this._isMounted){
+        this.setState({
+          clubs: resp,
+          login:false,
+        });
+      }
+     } catch (e){
+       if(this._isMounted)this.setState({
+         login:true
+       });
+    }
   };
 
   handleChange = (type,value)=>{
@@ -43,6 +53,7 @@ class App extends Component {
     });
     filteredClubs = this.state.league === "all" ? filteredClubs : filteredClubs.filter(c => c.league === this.state.league);
     let sortedClubs = _.sortBy(filteredClubs,c => c.placeInLeague);
+    const {login} = this.state;
     return (
     <Fragment>
         <Header noClubs={sortedClubs.length} />
@@ -52,6 +63,7 @@ class App extends Component {
           <ClubList clubs={sortedClubs} deleteHandler={this.deleteClub}/>
           </div>
         </div>
+        {login && (<Redirect to='/login'/>)}
       </Fragment>
     );
   }

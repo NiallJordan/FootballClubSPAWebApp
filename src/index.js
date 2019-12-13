@@ -7,6 +7,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import App from "./App";
 import ClubPage from "./components/clubComponents/clubPage/clubPage";
 import ClubForm from "./components/clubComponents/clubForm/index";
+import LoginPage from './components/loginPage';
 
 class Router extends Component {
   
@@ -18,6 +19,7 @@ class Router extends Component {
             <Switch>
               <Route path="/clubs/:id" component={ClubPage} />
               <Route path="/clubsForm" component={ClubForm}/>
+              <Route path='/login' component={LoginPage} />
               <Route exact path="/" component={App} />
               <Redirect from="*" to="/" />
             </Switch>
